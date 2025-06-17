@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Jotly</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#7952b3">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<!-- Фоновая половина -->
+<div class="half-bg">
+    <div class="overlay"></div>
+
+    <!-- Кнопки авторизации -->
+    <div class="auth-buttons position-absolute top-0 end-0 p-3 z-3">
+        {% if user.is_authenticated %}
+            <a href="{% url 'diary:dashboard' %}" class="btn btn-outline-light me-2">Мой дневник</a>
+            <a href="{% url 'diary:logout' %}" class="btn btn-light">Выйти</a>
+        {% else %}
+            <a href="#" class="btn btn-outline-light me-2">Вход</a>
+            <a href="#" class="btn btn-light">Регистрация</a>
+        {% endif %}
+    </div>
+
+    <!-- Кнопка меню -->
+    <div class="menu-button">
+        <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"
+                aria-controls="offcanvasMenu">
+            ☰
+        </button>
+    </div>
+
+    <!-- Заголовок страницы -->
+    <div class="hero-text">
+        {% block hero %}
+        <h1>JOTLY</h1>
+        <p>Порядок в голове начинается с записей</p>
+        {% endblock %}
+    </div>
+</div>
+
+<!-- Offcanvas меню -->
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMenu"
+     aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Меню</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Закрыть"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link text-white" href="{% url 'diary:home' %}">Главная</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="{% url 'diary:features' %}">Особенности</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="{% url 'diary:contacts' %}">Контакты</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Основной контент -->
+<div class="main-content">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- Футер -->
+<footer>
+    <p>© 2025 Jotly. Все права защищены.</p>
+</footer>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
