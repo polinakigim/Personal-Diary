@@ -1,0 +1,45 @@
+/* Основные стили для дневника */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    z-index: 100;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+}
+
+.profile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    bottom: 0;
+    width: 300px;
+    z-index: 101;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    padding: 20px;
+}
+
+.profile-sidebar.show {
+    right: 0;
+}
+
+.main-content {
+    margin-left: 270px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+
+/* Стили для карточек записей */
+.entry-card {
+    transition: transform 0.2s ease;
+}
+
+.entry-card:hover {
+    transform: translateY(-5px);
+}

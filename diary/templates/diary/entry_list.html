@@ -1,0 +1,96 @@
+{% extends "diary/base.html" %}
+
+{% block title %}Мой дневник | Jotly{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-start mb-4">
+    <!-- Карточка "всего записей" -->
+    <div class="card me-4" style="min-width: 120px;">
+        <div class="card-body text-center">
+            <h3 class="card-title">{{ object_list.count }}</h3>
+            <p class="card-text small">всего записей</p>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="flex-grow-1">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+
+                <h2>Дневник</h2>
+            </div>
+            <div>
+                <button class="btn btn-outline-primary me-2" id="profileButton">
+                    Профиль
+                </button>
+                <a href="{% url 'diary:entry_create' %}" class="btn btn-primary">
+                    + Новая запись
+                </a>
+            </div>
+        </div>
+        <div class="profile-sidebar" id="profileSidebar">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4>Мой профиль</h4>
+                <button class="btn-close" id="closeProfile"></button>
+            </div>
+
+            <div class="text-center mb-4">
+                <p class="text-muted small">{{ user.email }}</p>
+            </div>
+
+            <div class="list-group">
+                <a href="{% url 'diary:home' %}" class="list-group-item list-group-item-action">Главная</a>
+                <a href="{% url 'diary:features' %}" class="list-group-item list-group-item-action">Особенности</a>
+                <a href="{% url 'diary:contacts' %}" class="list-group-item list-group-item-action">Контакты</a>
+                <a href="{% url 'users:logout' %}" class="list-group-item list-group-item-action text-danger">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Поиск -->
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control"
+                   placeholder="Поиск по заголовку или содержимому..."
+                   value="{{ search_query }}">
+            <button type="submit" class="btn btn-outline-secondary">🔍</button>
+        </div>
+    </form>
+</div>
+</div>
+
+{% if object_list %}
+<div class="row row-cols-1 g-4">
+    {% for entry in object_list %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ entry.title|truncatechars:20 }}</h5>
+                <p class="card-text">{{ entry.content|truncatechars:50 }}</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">{{ entry.created_at|date:"d M Y" }}</small>
+                    <div class="btn-group">
+                        <a href="{% url 'diary:entry_detail' entry.pk %}" class="btn btn-sm btn-outline-primary">
+                            Подробнее
+                        </a>
+                        <a href="{% url 'diary:entry_update' entry.pk %}" class="btn btn-sm btn-outline-secondary">
+                            ✏️
+                        </a> <a href="{% url 'diary:entry_delete' entry.pk %}" class="btn btn-sm btn-outline-secondary">
+                        🗑️
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+    У вас пока нет записей. <a href="{% url 'diary:entry_create' %}">Создайте первую!</a>
+</div>
+{% endif %}
+{% endblock %}
