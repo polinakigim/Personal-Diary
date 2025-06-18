@@ -1,0 +1,45 @@
+{% extends "diary/base.html" %}
+
+{% block title %}Мой дневник | Jotly{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <!-- Кнопка возврата -->
+    <a href="{% url 'diary:entry_list' %}" class="btn btn-outline-secondary mb-3">
+        ← Назад к списку
+    </a>
+
+    <!-- Карточка записи -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>{{ entry.title }}</h3>
+            <div class="btn-group">
+                <a href="{% url 'diary:entry_update' entry.pk %}"
+                   class="btn btn-sm btn-outline-secondary">
+                    ✏️ Редактировать
+                </a>
+                <a href="{% url 'diary:entry_delete' entry.pk %}"
+                   class="btn btn-sm btn-outline-danger">
+                    🗑️ Удалить
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!-- Содержимое записи -->
+            <div class="entry-content mb-4">
+                {{ entry.content|linebreaks }}
+            </div>
+
+            <!-- Мета-информация -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <!-- Дата создания -->
+                <small class="text-muted">
+                    Создано: {{ entry.created_at|date:"d.m.Y H:i" }}
+                </small>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
