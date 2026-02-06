@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Особенности Jotly{% endblock %}
+
+{% block hero %}
+<h1>Почему Jotly?</h1>
+<p>Откройте для себя преимущества нашего сервиса</p>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="p-4 border rounded shadow-sm h-100 bg-white bg-opacity-75">
+                <h4>📓 Минимализм</h4>
+                <p>Простой и понятный интерфейс без отвлекающих деталей. Только ты и твои записи.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-4 border rounded shadow-sm h-100 bg-white bg-opacity-75">
+                <h4>💰 Бесплатно</h4>
+                <p>Jotly полностью бесплатен. Ни подписок, ни рекламы.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-4 border rounded shadow-sm h-100 bg-white bg-opacity-75">
+                <h4>📄 Неограниченное число записей</h4>
+                <p>Записывай сколько хочешь — никаких ограничений по количеству или объёму.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-4 border rounded shadow-sm h-100 bg-white bg-opacity-75">
+                <h4>🔖 Простая организация</h4>
+                <p>Удобная навигация и доступ к нужной информации.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

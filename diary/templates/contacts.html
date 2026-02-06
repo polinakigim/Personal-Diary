@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты Jotly{% endblock %}
+
+{% block hero %}
+<h1>Контакты</h1>
+<p>Свяжитесь с нами, если у вас есть вопросы</p>
+{% endblock %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="p-4 bg-white bg-opacity-75 rounded shadow-sm">
+                <h4><i class="bi bi-envelope"></i> Email</h4>
+                <p>support@jotly.app</p>
+
+                <h4 class="mt-4"><i class="bi bi-telegram"></i> Telegram</h4>
+                <p>@jotly_support</p>
+
+                <h4 class="mt-4"><i class="bi bi-clock"></i> Время работы</h4>
+                <p>Пн-Пт: 9:00 - 18:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
